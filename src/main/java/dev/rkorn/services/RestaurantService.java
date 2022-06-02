@@ -32,6 +32,7 @@ public class RestaurantService {
     }
 
     public void update(int id, Restaurant updatedRestaurant) {
+        //for restaurant update code
         jdbcTemplate.update(
                 "UPDATE Restaurants SET name=?, dishes=? WHERE id=?",
                 updatedRestaurant.getName(), updatedRestaurant.getDishes(), id);
