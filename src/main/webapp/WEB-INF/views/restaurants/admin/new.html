@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>New restaurant</title>
+</head>
+<body style="padding: 20px 0;">
+<div class="container">
+    <div class="row">
+        <form th:method="POST" th:action="@{/restaurants}" th:object="${restaurant}" style="margin-top: 20px;">
+            <div class="mb-3">
+                <label for="name" class="form-label">Restaurant's name:</label>
+                <input th:field="*{name}" id="name" type="text" class="form-control" aria-describedby="emailHelp">
+                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+            </div>
+            <div class="mb-3">
+                <label for="dishes" class="form-label">Dishes:</label>
+                <textarea th:field="*{dishes}" id="dishes" name="text" class="form-control" cols="30" rows="5"></textarea>
+                <div style="color:red" th:if="${#fields.hasErrors('dishes')}" th:errors="*{dishes}">Dishes Error</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+<!--<form th:method="POST" th:action="@{/WEB-INF/views/restaurants}" th:object="${restaurant}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <br/>
+    <label for="age">Enter Dishes: </label>
+    <input type="text" th:field="*{dishes}" id="age"/>
+    <div style="color:red" th:if="${#fields.hasErrors('dishes')}" th:errors="*{dishes}">Dishes Error</div>
+    <br/>
+    <input type="submit" value="Create!"/>
+</form>-->
