@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/restaurants")
@@ -21,8 +22,10 @@ public class RestaurantsAdminController {
     }
 
     @GetMapping()
-    public String index(Model model) {
+    public String index(Model model, Principal principal) {
+       // String username = principal.getName();
         model.addAttribute("restaurant", restaurantService.index());
+        model.addAttribute("username", principal.getName());
         return "restaurants/admin/index";
     }
 

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/user")
 public class RestaurantUserController {
@@ -18,8 +20,9 @@ public class RestaurantUserController {
     }
 
     @GetMapping()
-    public String index(Model model) {
+    public String index(Model model, Principal principal) {
         model.addAttribute("restaurant", restaurantService.index());
+        model.addAttribute("username", principal.getName());
         return "restaurants/user/index";
     }
 
