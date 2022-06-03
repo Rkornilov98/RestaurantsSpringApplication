@@ -74,4 +74,5 @@ public class SpringConfig implements WebMvcConfigurer {
         filterRegistrationBean.setUrlPatterns(Arrays.asList("/*"));
         return filterRegistrationBean;
     }
+
 }

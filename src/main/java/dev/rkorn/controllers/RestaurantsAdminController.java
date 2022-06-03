@@ -1,4 +1,4 @@
-package dev.rkorn.controller;
+package dev.rkorn.controllers;
 
 import dev.rkorn.entities.Restaurant;
 import dev.rkorn.services.RestaurantService;
