@@ -24,7 +24,7 @@
                 <p th:text="${restaurant.getName()}">Text</p>
                 <a th:href="@{/restaurants/{id}/edit(id=${restaurant.getId()})}" class="btn btn-primary">Edit</a>
             </li>
-            <li th:text="${restaurant.getDishes()}" class="list-group-item">text</li>
+            <li th:text="${restaurant.getDishes()}" class="list-group-item dishes">text</li>
         </ul>
     </div>
     <div class="row"><a class="btn btn-primary" href="/restaurants/new">Create new restaurant</a></div>
@@ -32,6 +32,28 @@
 <script>
     const username = document.querySelector('.username').textContent
     document.querySelector('.username').textContent = `You are logged in as: ${username}`
+
+    const ul = document.querySelectorAll('.list-group');
+    const dishes = document.querySelectorAll('.dishes');
+    let arr = [];
+
+    for (let i = 0; i < dishes.length; i++) {
+        let arrDishes = dishes[i].textContent.split(', ').map(item => {
+            const li = document.createElement('li');
+            li.classList.add('list-group-item')
+            li.textContent = item
+
+            return li
+        })
+        arr.push(arrDishes)
+    }
+
+    ul.forEach((item, ind) => {
+        dishes[ind].remove()
+        for (let i = 0; i < arr[ind].length; i++) {
+            item.append(arr[ind][i])
+        }
+    })
 </script>
 </body>
 </html>

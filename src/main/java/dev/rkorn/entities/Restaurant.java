@@ -10,7 +10,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 @Entity
 public class Restaurant {
-    //AutoIncrement
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

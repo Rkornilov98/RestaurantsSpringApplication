@@ -13,9 +13,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                //.antMatchers("/").authenticated() /для аутентифицированных пользователей
-                .antMatchers("/restaurants/**").hasRole("ADMIN") //права админа в каталог запросов :/restaurants
-                .antMatchers("/user/**").hasRole("USER") //права пользователя в каталог запросов :/user
+                .antMatchers("/restaurants/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
                 .and()
                 .formLogin()
                 .and()
@@ -26,8 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public JdbcUserDetailsManager users(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        //$2a$12$ZUZ0JxibgaxrWvz8dgY50u5ptPjI5xY3pf3.zvce2xbhK7Q8R/6aS user
-        //$2a$12$GS48oVTSLDT.6eCieWr7de89bGeuPTV.oduFDtSUb/WUgFS.TJr.i admin
         return jdbcUserDetailsManager;
     }
 }
