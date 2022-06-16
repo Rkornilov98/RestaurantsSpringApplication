@@ -47,7 +47,6 @@ public class RestaurantService {
     }
 
     public String select(String username,int id) throws Exception {
-        // = "SELECT restaurants_id FROM user_restaurants WHERE username=?";
         try{
             jdbcTemplate.execute("do $$ \n" +
                     "declare\n" +
@@ -71,7 +70,6 @@ public class RestaurantService {
             jdbcTemplate.update("update user_restaurants SET restaurants_id=? where username=?", id, username);
         }
         System.out.println("Debug:"+restaurantID);
-        //если restaurantId!=null изменить существующую запись для username
         String restaurantName = show(id).getName();
         return restaurantName;
     }
