@@ -15,18 +15,20 @@ import java.util.Set;
 public class UserService {
 
     private final JdbcTemplate jdbcTemplate;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     public UserService(JdbcTemplate jdbcTemplate, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String getAuthority(String username){
+
+    public String getAuthority(String username) {
         String sql = "SELECT authority FROM Authorities WHERE username=?";
 
         String authority = (String) jdbcTemplate.queryForObject(
-                sql, new Object[] { username }, String.class);
+                sql, new Object[]{username}, String.class);
         return authority;
     }
 

@@ -50,8 +50,7 @@ public class MainController {
         try {
             userService.save(user);
             return "redirect:/";
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("registrationError", "User with this name already exists");
             return "restaurants/registration";
         }

@@ -23,7 +23,7 @@ public class RestaurantsAdminController {
 
     @GetMapping()
     public String index(Model model, Principal principal) {
-       // String username = principal.getName();
+
         model.addAttribute("restaurant", restaurantService.index());
         model.addAttribute("username", principal.getName());
         return "restaurants/admin/index";

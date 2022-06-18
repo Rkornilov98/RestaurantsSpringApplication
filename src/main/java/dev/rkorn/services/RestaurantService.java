@@ -1,16 +1,18 @@
 package dev.rkorn.services;
+
 import dev.rkorn.entities.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.List;
+
 @Component
 public class RestaurantService {
 
     private final JdbcTemplate jdbcTemplate;
+
     @Autowired
     public RestaurantService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -46,8 +48,8 @@ public class RestaurantService {
 
     }
 
-    public String select(String username,int id) throws Exception {
-        try{
+    public String select(String username, int id) throws Exception {
+        try {
             jdbcTemplate.execute("do $$ \n" +
                     "declare\n" +
                     "eee bool;\n" +
@@ -56,20 +58,19 @@ public class RestaurantService {
                     "if eee = true then  raise exception 'Нельзя изменить выбор после 11:00:00 !'; end if;\n" +
                     "end ;\n" +
                     "$$ LANGUAGE plpgsql;\n");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e);
         }
         String sql = "select COALESCE((select 1 from user_restaurants where username = ?),0) is_exists";
         Integer restaurantID = (Integer) jdbcTemplate.queryForObject(
-                sql, new Object[] { username }, Integer.class);
-        if (restaurantID==0) jdbcTemplate.update(
+                sql, new Object[]{username}, Integer.class);
+        if (restaurantID == 0) jdbcTemplate.update(
                 "insert into user_restaurants (username, restaurants_id) values (?,?)", username, id);
 
         else {
             jdbcTemplate.update("update user_restaurants SET restaurants_id=? where username=?", id, username);
         }
-        System.out.println("Debug:"+restaurantID);
+        System.out.println("Debug:" + restaurantID);
         String restaurantName = show(id).getName();
         return restaurantName;
     }
